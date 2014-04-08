@@ -4,16 +4,13 @@ FROM    centos
 MAINTAINER Charles Nguyen <ctn@umn.edu>
 
 # Install updates and tools
-RUN		yum install -y gcc make bison autoconf automake pkgconfig libtool elfutils gcc-c++ flex swig gcc-gfortran tk tk-devel
-
-# Added EPEL for cmake28. Put at end of yum install order so we don't install other packages or else disable. 
-RUN		rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm && yum install -y cmake28
+RUN		yum install -y gcc make bison autoconf automake pkgconfig libtool elfutils gcc-c++ flex swig gcc-gfortran tk tk-devel libSM  libXext
 
 # Set paths for all software        
 # We are setting these early on to reduce the number of layers created. Update these as you update software.
 # It does not hurt to specify these too early.
 
-ENV     PATH    /tools/anaconda/bin:$PATH:/StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5/bin                                                                      
+ENV     PATH    /tools/anaconda/bin:/tools/gdal/bin:$PATH:/StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5/bin                                                                      
 ENV     LD_LIBRARY_PATH $LD_LIBRARY_PATH:/tools/jpeg-9a/lib:/StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5/lib                                                                        
 
 # Install MiniConda Python distribution
@@ -41,11 +38,14 @@ RUN		wget http://download.osgeo.org/geos/geos-3.4.2.tar.bz2 && tar xvfj geos-3.4
 RUN		wget http://download.osgeo.org/proj/proj-4.8.0.tar.gz && tar xvfz proj-4.8.0.tar.gz && cd proj-4.8.0 && ./configure --prefix=/tools/proj --with-jni=no && make -j && make install && cd / && rm -rf proj*
 
 # OPENJPEG
-RUN		yum install cmake28 && wget https://openjpeg.googlecode.com/files/openjpeg-2.0.0-Linux-i386.tar.gz && tar xvfz openjpeg-2.0.0-Linux-i386.tar.gz && cd openjpeg-2.0.0-Linux-i386 && cmake28 -DCMAKE_INSTALL_PREFIX=/tools/openjpeg . && make install && cd / && rm -rf openjpeg*
+RUN		wget https://openjpeg.googlecode.com/files/openjpeg-2.0.0-Linux-i386.tar.gz && tar xvfz openjpeg-2.0.0-Linux-i386.tar.gz -C /tools  && rm -rf openjpeg*
 
 # FileGDB
 # GDAL
-# SET GDAL_DATA PATH
+RUN		wget http://download.osgeo.org/gdal/1.11.0/gdal-1.11.0beta1.tar.gz && tar xvfz gdal-1.11.0beta1.tar.gz && cd gdal-1.11.0beta1 &&./configure --prefix=/tools/gdal --with-geos=/tools/geos/bin/geos-config --with-cfitsio=/tools/cfitsio --with-python --with-openjpeg=/tools/openjpeg-2.0.0-Linux-i386 --with-sqlite3=no && make  && make install && cd / && rm -rf gdal*
+
+ENV		GDAL_DATA	/tools/gdal/share/gdal
 
 # Install Ames Stereo Pipeline
 RUN     wget http://byss.ndc.nasa.gov/stereopipeline/binaries/StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5.tar.bz2 && tar xvfj StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5.tar.bz2 && rm StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5.tar.bz2
+
