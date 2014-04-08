@@ -6,6 +6,9 @@ MAINTAINER Charles Nguyen <ctn@umn.edu>
 # Install updates and tools
 RUN		yum install -y gcc make bison autoconf automake pkgconfig libtool elfutils gcc-c++ flex swig gcc-gfortran tk tk-devel
 
+# Added EPEL for cmake28. Put at end of yum install order so we don't install other packages or else disable. 
+RUN		yum rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm && yum install -y cmake28
+
 # Set paths for all software        
 # We are setting these early on to reduce the number of layers created. Update these as you update software.
 # It does not hurt to specify these too early.
@@ -38,7 +41,7 @@ RUN		wget http://download.osgeo.org/geos/geos-3.4.2.tar.bz2 && tar xvfj geos-3.4
 RUN		wget http://download.osgeo.org/proj/proj-4.8.0.tar.gz && tar xvfz proj-4.8.0.tar.gz && cd proj-4.8.0 && ./configure --prefix=/tools/proj --with-jni=no && make -j && make install && cd / && rm -rf proj*
 
 # OPENJPEG
-RUN		wget https://openjpeg.googlecode.com/files/openjpeg-2.0.0-Linux-i386.tar.gz && tar xvfz openjpeg-2.0.0-Linux-i386.tar.gz && cd openjpeg-2.0.0-Linux-i386 && cmake28 -DCMAKE_INSTALL_PREFIX=/tools/openjpeg . && make install && cd / && rm -rf openjpeg*
+RUN		yum install cmake28 && wget https://openjpeg.googlecode.com/files/openjpeg-2.0.0-Linux-i386.tar.gz && tar xvfz openjpeg-2.0.0-Linux-i386.tar.gz && cd openjpeg-2.0.0-Linux-i386 && cmake28 -DCMAKE_INSTALL_PREFIX=/tools/openjpeg . && make install && cd / && rm -rf openjpeg*
 
 # FileGDB
 # GDAL
