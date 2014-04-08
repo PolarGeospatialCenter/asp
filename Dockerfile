@@ -7,7 +7,7 @@ MAINTAINER Charles Nguyen <ctn@umn.edu>
 RUN		yum install -y gcc make bison autoconf automake pkgconfig libtool elfutils gcc-c++ flex swig gcc-gfortran tk tk-devel
 
 # Added EPEL for cmake28. Put at end of yum install order so we don't install other packages or else disable. 
-RUN		yum rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm && yum install -y cmake28
+RUN		rpm -Uvh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm && yum install -y cmake28
 
 # Set paths for all software        
 # We are setting these early on to reduce the number of layers created. Update these as you update software.
