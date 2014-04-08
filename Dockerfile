@@ -28,9 +28,15 @@ RUN		wget http://www.ijg.org/files/jpegsrc.v9a.tar.gz && tar xvfz jpegsrc.v9a.ta
 # Install Python Imaging Library
 RUN		wget http://effbot.org/downloads/Imaging-1.1.7.tar.gz && tar xvfz Imaging-1.1.7.tar.gz && cd Imaging-1.1.7 && sed -i 's/JPEG_ROOT = None/JPEG_ROOT = \("\/tools\/jpeg-9a"\)/g' setup.py && python setup.py build && python setup.py install && cd / && rm -rf Imaging-1.1.7 Imaging-1.1.7.tar.gz
 
-# Python EPSG
-# CFITSIO
+# Install Python EPSG
+RUN		wget --no-check-certificate https://pypi.python.org/packages/source/p/python-epsg/python-epsg-0.1.4.tar.gz && tar xvfz python-epsg-0.1.4.tar.gz && cd python-epsg-0.1.4 && python setup.py build && python setup.py install && cd / && rm -rf python-epsg-0.1.4*
+
+# Install CFITSIO
+RUN		wget ftp://heasarc.gsfc.nasa.gov/software/fitsio/c/cfitsio3360.tar.gz && tar xvfz cfitsio3360.tar.gz && cd cfitsio && ./configure --prefix=/tools/cfitsio --enable-sse2 --enable-ssse3 --enable-reentrant && make -j && make install && cd / && rm -rf cfitsio*
+
 # GEOS
+RUN		wget http://download.osgeo.org/geos/geos-3.4.2.tar.bz2 && tar xvfj geos-3.4.2.tar.bz2 && cd geos-3.4.2 && export SWIG_FEATURES="-I/usr/share/swig/1.3.40/python -I/usr/share/swig/1.3.40" && ./configure --prefix=/tools/geos --enable-python && make -j && make install
+
 # PROJ
 # OPENJPEG
 # FileGDB
