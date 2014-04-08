@@ -5,7 +5,8 @@ MAINTAINER Charles Nguyen <ctn@umn.edu>
 
 # Install updates and tools
 RUN		yum groupinstall -y "Development Tools"
-#### Install other items. TCL/TK, Freetype
+RUN		yum install -y tk tk-devel
+
 ### Need to reduce size of "DevelopmentTools", ID packages needed and only install
 
 # Set paths for all software        
@@ -26,7 +27,6 @@ RUN		wget http://09c8d0b2229f813c1b93-c95ac804525aac4b6dba79b00b39d1d3.r79.cf1.r
 RUN		wget http://www.ijg.org/files/jpegsrc.v9a.tar.gz && tar xvfz jpegsrc.v9a.tar.gz && cd jpeg-9a && ./configure --prefix=/tools/jpeg-9a && make && make install && cd / && rm -rf /jpeg-9a /jpegsrc.v9a.tar.gz
 
 # Install Python Imaging Library
-# Need to add ZLIB in setup.py
 RUN		wget http://effbot.org/downloads/Imaging-1.1.7.tar.gz && tar xvfz Imaging-1.1.7.tar.gz && cd Imaging-1.1.7 && sed -i 's/JPEG_ROOT = None/JPEG_ROOT = \("\/tools\/jpeg-9a"\)/g' setup.py && python setup.py build && python setup.py install && cd / && rm -rf Imaging-1.1.7 Imaging-1.1.7.tar.gz
 
 # Python EPSG
