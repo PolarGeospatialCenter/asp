@@ -4,10 +4,7 @@ FROM    centos
 MAINTAINER Charles Nguyen <ctn@umn.edu>
 
 # Install updates and tools
-RUN		yum groupinstall -y "Development Tools"
-RUN		yum install -y tk tk-devel
-
-### Need to reduce size of "DevelopmentTools", ID packages needed and only install
+RUN		yum install -y gcc make bison autoconf automake pkgconfig libtool elfutils gcc-c++ flex swig gcc-gfortran tk tk-devel
 
 # Set paths for all software        
 # We are setting these early on to reduce the number of layers created. Update these as you update software.
@@ -21,7 +18,9 @@ ENV     LD_LIBRARY_PATH $LD_LIBRARY_PATH:/tools/jpeg-9a/lib:/StereoPipeline-2.3.
 
 # Need to reduce bulk, uninstall all un-needed
 
-RUN		wget http://09c8d0b2229f813c1b93-c95ac804525aac4b6dba79b00b39d1d3.r79.cf1.rackcdn.com/Anaconda-1.9.1-Linux-x86_64.sh && sh Anaconda-1.9.1-Linux-x86_64.sh -b -p /tools/anaconda && rm -f Anaconda-1.9.1-Linux-x86_64.sh
+RUN		wget http://repo.continuum.io/miniconda/Miniconda-3.3.0-Linux-x86_64.sh && sh Miniconda-3.3.0-Linux-x86_64.sh -b -p /tools/anaconda && rm -f Miniconda-3.3.0-Linux-x86_64.sh
+RUN		echo y | conda install numpy scipy bzip2 cmake freeglut freetype pandas psycopg2 readline sqlite sqlalchemy swig zlib
+#RUN		wget http://09c8d0b2229f813c1b93-c95ac804525aac4b6dba79b00b39d1d3.r79.cf1.rackcdn.com/Anaconda-1.9.1-Linux-x86_64.sh && sh Anaconda-1.9.1-Linux-x86_64.sh -b -p /tools/anaconda && rm -f Anaconda-1.9.1-Linux-x86_64.sh
 
 # Install JPEG-9 libraries
 RUN		wget http://www.ijg.org/files/jpegsrc.v9a.tar.gz && tar xvfz jpegsrc.v9a.tar.gz && cd jpeg-9a && ./configure --prefix=/tools/jpeg-9a && make && make install && cd / && rm -rf /jpeg-9a /jpegsrc.v9a.tar.gz
