@@ -38,6 +38,13 @@ RUN		wget http://download.osgeo.org/geos/geos-3.4.2.tar.bz2 && \
 		./configure --prefix=/tools/geos --enable-python && \
 		make -j && make install && \
 		cd / && rm -rf geos*
+# PROJ
+RUN		wget http://download.osgeo.org/proj/proj-4.8.0.tar.gz && \
+		tar xvfz proj-4.8.0.tar.gz && \
+		cd proj-4.8.0 && \
+		./configure --prefix=/tools/proj --with-jni=no && \
+		make -j && make install && \
+		cd / && rm -rf proj*
 
 # OPENJPEG
 RUN		wget https://openjpeg.googlecode.com/files/openjpeg-2.0.0-Linux-i386.tar.gz && \
