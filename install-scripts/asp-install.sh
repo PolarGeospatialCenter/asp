@@ -74,3 +74,6 @@ rm StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5.tar.bz2
 
 echo "export	PATH=$PATH:\$PATH" >> ~/init-asp.sh
 echo "export	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:\$LD_LIBRARY_PATH" >> ~/init-asp.sh
+echo
+echo	"The tools were installed in $PATH."
+echo	"There is an init script that sets the environment and is installed at ~/init-asp.sh. You can source this file to run."

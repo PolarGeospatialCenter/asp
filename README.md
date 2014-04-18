@@ -1,4 +1,8 @@
-docker-asp
+Ames Stereo Pipeline - PGC
 ==========
 
-Docker image of GDAL and ASP for UMN PGC
+This contains a collection of the ASP tools that PGC uses in their workflow. 
+
+Root
++--- docker = Contains a Docker container Dockerfile to run in a Docker environment
++--- install-scripts = Bash scripts to install the environment on HPC systems
