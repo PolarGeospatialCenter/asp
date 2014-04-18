@@ -57,8 +57,8 @@ cd $tools && \
 wget http://download.osgeo.org/gdal/1.11.0/gdal-1.11.0beta1.tar.gz && \
 tar xvfz gdal-1.11.0beta1.tar.gz && \
 cd gdal-1.11.0beta1 && \
-./configure --prefix=$tools/gdal --with-geos=/tools/geos/bin/geos-config --with-cfitsio=/tools/cfitsio \
---with-python --with-openjpeg=/tools/openjpeg-2.0.0-Linux-i386 --with-sqlite3=no && \
+./configure --prefix=$tools/gdal --with-geos=$tools/geos/bin/geos-config --with-cfitsio=$tools/cfitsio \
+--with-python --with-openjpeg=$tools/openjpeg-2.0.0-Linux-i386 --with-sqlite3=no && \
 make && make install && \
 cd $tools && rm -rf gdal*
 
@@ -75,5 +75,5 @@ rm StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5.tar.bz2
 echo "export	PATH=$PATH:\$PATH" >> ~/init-asp.sh
 echo "export	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:\$LD_LIBRARY_PATH" >> ~/init-asp.sh
 echo
-echo	"The tools were installed in $PATH."
+echo	"The tools were installed in $tools."
 echo	"There is an init script that sets the environment and is installed at ~/init-asp.sh. You can source this file to run."
