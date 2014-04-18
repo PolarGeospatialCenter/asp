@@ -12,7 +12,7 @@ RUN		yum install -y gcc make bison autoconf automake pkgconfig libtool elfutils 
 # It does not hurt to specify these too early.
 
 ENV     PATH    /tools/anaconda/bin:/tools/gdal/bin:$PATH:/StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5/bin
-ENV     LD_LIBRARY_PATH $LD_LIBRARY_PATH:/StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5/lib                                                                        
+ENV     LD_LIBRARY_PATH $LD_LIBRARY_PATH:/tools/gdal/lib
 
 # Install MiniConda Python distribution
 # This will build the base directory /tools for all following software
@@ -52,6 +52,8 @@ RUN		wget https://openjpeg.googlecode.com/files/openjpeg-2.0.0-Linux-i386.tar.gz
 		tar xvfz openjpeg-2.0.0-Linux-i386.tar.gz -C /tools  && \
 		rm -rf openjpeg*
 
+ENV		SWIG_FEATURES "-I/usr/share/swig/1.3.40/python -I/usr/share/swig/1.3.40"
+
 # GDAL
 # Parallel make will fail due to race conditions. Do not use -j
 RUN		wget http://download.osgeo.org/gdal/1.11.0/gdal-1.11.0beta1.tar.gz && \
@@ -60,6 +62,7 @@ RUN		wget http://download.osgeo.org/gdal/1.11.0/gdal-1.11.0beta1.tar.gz && \
 		./configure --prefix=/tools/gdal --with-geos=/tools/geos/bin/geos-config --with-cfitsio=/tools/cfitsio \
 		--with-python --with-openjpeg=/tools/openjpeg-2.0.0-Linux-i386 --with-sqlite3=no && \
 		make && make install && \
+		cd swig/python && python setup.py install && \
 		cd / && rm -rf gdal*
 
 ENV		GDAL_DATA	/tools/gdal/share/gdal

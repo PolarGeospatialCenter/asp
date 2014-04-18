@@ -6,7 +6,7 @@ read tools
 
 mkdir -p $tools
 export	PATH=$tools/anaconda/bin:$tools/gdal/bin:$PATH:$tools/StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5/bin
-export	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$tools/StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5/lib
+export	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$tools/gdal/lib
 
 # Install MiniConda Python distribution
 # This will build the base directory /tools for all following software
@@ -60,6 +60,7 @@ cd gdal-1.11.0beta1 && \
 ./configure --prefix=$tools/gdal --with-geos=$tools/geos/bin/geos-config --with-cfitsio=$tools/cfitsio \
 --with-python --with-openjpeg=$tools/openjpeg-2.0.0-Linux-i386 --with-sqlite3=no && \
 make && make install && \
+cd swig/python && python setup.py install && \
 cd $tools && rm -rf gdal*
 
 export	GDAL_DATA=$tools/gdal/share/gdal
