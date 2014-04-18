@@ -11,7 +11,7 @@ RUN		yum install -y gcc make bison autoconf automake pkgconfig libtool elfutils 
 # We are setting these early on to reduce the number of layers created. Update these as you update software.
 # It does not hurt to specify these too early.
 
-ENV     PATH    /tools/anaconda/bin:/tools/gdal/bin:$PATH:/StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5/bin                                                                      
+ENV     PATH    /tools/anaconda/bin:/tools/gdal/bin:$PATH:/StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5/bin
 ENV     LD_LIBRARY_PATH $LD_LIBRARY_PATH:/StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5/lib                                                                        
 
 # Install MiniConda Python distribution
@@ -38,6 +38,7 @@ RUN		wget http://download.osgeo.org/geos/geos-3.4.2.tar.bz2 && \
 		./configure --prefix=/tools/geos --enable-python && \
 		make -j && make install && \
 		cd / && rm -rf geos*
+
 # PROJ
 RUN		wget http://download.osgeo.org/proj/proj-4.8.0.tar.gz && \
 		tar xvfz proj-4.8.0.tar.gz && \
