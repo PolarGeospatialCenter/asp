@@ -23,8 +23,7 @@ wget ftp://heasarc.gsfc.nasa.gov/software/fitsio/c/cfitsio3360.tar.gz && \
 tar xvfz cfitsio3360.tar.gz && \
 cd cfitsio && \
 ./configure --prefix=$tools/cfitsio --enable-sse2 --enable-ssse3 --enable-reentrant && \
-make -j && make install && \
-cd $tools && rm -rf cfitsio*
+make -j && make install
 
 # GEOS
 cd $tools && \
@@ -33,8 +32,7 @@ tar xvfj geos-3.4.2.tar.bz2 && \
 cd geos-3.4.2 && \
 export SWIG_FEATURES="-I/usr/share/swig/1.3.40/python -I/usr/share/swig/1.3.40" && \
 ./configure --prefix=$tools/geos --enable-python && \
-make -j && make install && \
-cd $tools  && rm -rf geos*
+make -j && make install
 
 # PROJ
 cd $tools && \
@@ -42,14 +40,12 @@ wget http://download.osgeo.org/proj/proj-4.8.0.tar.gz && \
 tar xvfz proj-4.8.0.tar.gz && \
 cd proj-4.8.0 && \
 ./configure --prefix=$tools/proj --with-jni=no && \
-make -j && make install && \
-cd $tools && rm -rf proj*
+make -j && make install
 
 # OPENJPEG
 cd $tools && \
 wget https://openjpeg.googlecode.com/files/openjpeg-2.0.0-Linux-i386.tar.gz && \
-tar xvfz openjpeg-2.0.0-Linux-i386.tar.gz -C $tools  && \
-rm -rf openjpeg*
+tar xvfz openjpeg-2.0.0-Linux-i386.tar.gz -C $tools  
 
 # GDAL
 # Parallel make will fail due to race conditions. Do not use -j
@@ -60,8 +56,7 @@ cd gdal-1.11.0beta1 && \
 ./configure --prefix=$tools/gdal --with-geos=$tools/geos/bin/geos-config --with-cfitsio=$tools/cfitsio \
 --with-python --with-openjpeg=$tools/openjpeg-2.0.0-Linux-i386 --with-sqlite3=no && \
 make && make install && \
-cd swig/python && python setup.py install && \
-cd $tools && rm -rf gdal*
+cd swig/python && python setup.py install
 
 export	GDAL_DATA=$tools/gdal/share/gdal
 
