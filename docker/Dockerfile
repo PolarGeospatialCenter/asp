@@ -4,7 +4,7 @@ FROM    centos
 MAINTAINER Charles Nguyen <ctn@umn.edu>
 
 # Install updates and tools
-RUN		yum install -y gcc make bison autoconf automake pkgconfig libtool elfutils gcc-c++ flex swig gcc-gfortran \ 
+RUN		yum install -y gcc make bison autoconf automake pkgconfig libtool elfutils gcc-c++ flex swig gcc-gfortran \
 		libSM  libXext
 
 # Set paths for all software        
@@ -12,7 +12,7 @@ RUN		yum install -y gcc make bison autoconf automake pkgconfig libtool elfutils 
 # It does not hurt to specify these too early.
 
 ENV     PATH    /tools/anaconda/bin:/tools/gdal/bin:$PATH:/StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5/bin
-ENV     LD_LIBRARY_PATH $LD_LIBRARY_PATH:/tools/gdal/lib
+ENV     LD_LIBRARY_PATH $LD_LIBRARY_PATH:/tools/gdal/lib:/tools/openjpeg-2/lib:/tools/proj/lib
 
 # Install MiniConda Python distribution
 # This will build the base directory /tools for all following software
@@ -48,9 +48,15 @@ RUN		wget http://download.osgeo.org/proj/proj-4.8.0.tar.gz && \
 		cd / && rm -rf proj*
 
 # OPENJPEG
-RUN		wget https://openjpeg.googlecode.com/files/openjpeg-2.0.0-Linux-i386.tar.gz && \
-		tar xvfz openjpeg-2.0.0-Linux-i386.tar.gz -C /tools  && \
-		rm -rf openjpeg*
+RUN		rpm -ivh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm && \
+		yum install -y cmake28 && \
+        wget https://openjpeg.googlecode.com/files/openjpeg-2.0.0.tar.gz && \
+		tar xvfz openjpeg-2.0.0.tar.gz && \
+		cd openjpeg-2.0.0 && \
+		cmake28 -DCMAKE_INSTALL_PREFIX=/tools/openjpeg-2 && \
+		make install && \
+		cd / && rm -rf openjpeg*
+
 
 ENV		SWIG_FEATURES "-I/usr/share/swig/1.3.40/python -I/usr/share/swig/1.3.40"
 
@@ -60,7 +66,7 @@ RUN		wget http://download.osgeo.org/gdal/1.11.0/gdal-1.11.0beta1.tar.gz && \
 		tar xvfz gdal-1.11.0beta1.tar.gz && \
 		cd gdal-1.11.0beta1 && \
 		./configure --prefix=/tools/gdal --with-geos=/tools/geos/bin/geos-config --with-cfitsio=/tools/cfitsio \
-		--with-python --with-openjpeg=/tools/openjpeg-2.0.0-Linux-i386 --with-sqlite3=no && \
+		--with-python --with-openjpeg=/tools/openjpeg-2 --with-sqlite3=no && \
 		make && make install && \
 		cd swig/python && python setup.py install && \
 		cd / && rm -rf gdal*
@@ -71,4 +77,3 @@ ENV		GDAL_DATA	/tools/gdal/share/gdal
 RUN     wget http://byss.ndc.nasa.gov/stereopipeline/binaries/StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5.tar.bz2 && \
 		tar xvfj StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5.tar.bz2 && \
 		rm StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5.tar.bz2
-
