@@ -50,7 +50,7 @@ RUN		wget http://download.osgeo.org/proj/proj-4.8.0.tar.gz && \
 # OPENJPEG
 RUN		rpm -ivh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm && \
 		yum install -y cmake28 && \
-        wget https://openjpeg.googlecode.com/files/openjpeg-2.0.0.tar.gz && \
+		wget https://openjpeg.googlecode.com/files/openjpeg-2.0.0.tar.gz && \
 		tar xvfz openjpeg-2.0.0.tar.gz && \
 		cd openjpeg-2.0.0 && \
 		cmake28 -DCMAKE_INSTALL_PREFIX=/tools/openjpeg-2 && \

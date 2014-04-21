@@ -6,7 +6,7 @@ read tools
 
 mkdir -p $tools
 export	PATH=$tools/anaconda/bin:$tools/gdal/bin:$PATH:$tools/StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5/bin
-export	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$tools/gdal/lib
+export	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$tools/gdal/lib:$tools/openjpeg-2/lib:$tools/proj/lib
 
 # Install MiniConda Python distribution
 # This will build the base directory /tools for all following software
@@ -44,8 +44,11 @@ make -j && make install
 
 # OPENJPEG
 cd $tools && \
-wget https://openjpeg.googlecode.com/files/openjpeg-2.0.0-Linux-i386.tar.gz && \
-tar xvfz openjpeg-2.0.0-Linux-i386.tar.gz -C $tools  
+wget https://openjpeg.googlecode.com/files/openjpeg-2.0.0.tar.gz && \
+tar xvfz openjpeg-2.0.0.tar.gz && \
+cd openjpeg-2.0.0 && \
+cmake28 -DCMAKE_INSTALL_PREFIX=/tools/openjpeg-2 && \
+make install
 
 # GDAL
 # Parallel make will fail due to race conditions. Do not use -j
@@ -54,7 +57,7 @@ wget http://download.osgeo.org/gdal/1.11.0/gdal-1.11.0beta1.tar.gz && \
 tar xvfz gdal-1.11.0beta1.tar.gz && \
 cd gdal-1.11.0beta1 && \
 ./configure --prefix=$tools/gdal --with-geos=$tools/geos/bin/geos-config --with-cfitsio=$tools/cfitsio \
---with-python --with-openjpeg=$tools/openjpeg-2.0.0-Linux-i386 --with-sqlite3=no && \
+--with-python --with-openjpeg=$tools/openjpeg-2 --with-sqlite3=no && \
 make && make install && \
 cd swig/python && python setup.py install
 
