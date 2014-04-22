@@ -43,15 +43,18 @@ cd proj-4.8.0 && \
 make -j && make install
 
 # OPENJPEG
+# Change to cmake or cmake28 depending on what is installed
 cd $tools && \
 wget https://openjpeg.googlecode.com/files/openjpeg-2.0.0.tar.gz && \
 tar xvfz openjpeg-2.0.0.tar.gz && \
 cd openjpeg-2.0.0 && \
-cmake28 -DCMAKE_INSTALL_PREFIX=/tools/openjpeg-2 && \
+cmake -DCMAKE_INSTALL_PREFIX=$tools/openjpeg-2 && \
 make install
+
 
 # GDAL
 # Parallel make will fail due to race conditions. Do not use -j
+export	SWIG_FEATURES="-I/usr/share/swig/1.3.40/python -I/usr/share/swig/1.3.40"
 cd $tools && \
 wget http://download.osgeo.org/gdal/1.11.0/gdal-1.11.0beta1.tar.gz && \
 tar xvfz gdal-1.11.0beta1.tar.gz && \
@@ -68,8 +71,6 @@ cd $tools && \
 wget http://byss.ndc.nasa.gov/stereopipeline/binaries/StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5.tar.bz2 && \
 tar xvfj StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5.tar.bz2 -C $tools && \
 rm StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5.tar.bz2
-
-
 
 echo "export	PATH=$PATH:\$PATH" >> ~/init-asp.sh
 echo "export	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:\$LD_LIBRARY_PATH" >> ~/init-asp.sh
