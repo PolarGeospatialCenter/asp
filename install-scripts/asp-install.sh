@@ -26,13 +26,13 @@ cd cfitsio && \
 make -j && make install
 
 # GEOS
+export	SWIG_FEATURES="-I/usr/share/swig/1.3.40/python -I/usr/share/swig/1.3.40"
 cd $tools && \
 wget http://download.osgeo.org/geos/geos-3.4.2.tar.bz2 && \
 tar xvfj geos-3.4.2.tar.bz2 && \
 cd geos-3.4.2 && \
-export SWIG_FEATURES="-I/usr/share/swig/1.3.40/python -I/usr/share/swig/1.3.40" && \
-./configure --prefix=$tools/geos --enable-python && \
-make -j && make install
+./configure --prefix=$tools/geos && \
+make -j && make install 
 
 # PROJ
 cd $tools && \

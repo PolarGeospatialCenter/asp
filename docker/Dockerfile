@@ -13,9 +13,11 @@ RUN		yum install -y gcc make bison autoconf automake pkgconfig libtool elfutils 
 
 ENV     PATH    /tools/anaconda/bin:/tools/gdal/bin:$PATH:/StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5/bin
 ENV     LD_LIBRARY_PATH $LD_LIBRARY_PATH:/tools/gdal/lib:/tools/openjpeg-2/lib:/tools/proj/lib
+ENV	SWIG_FEATURES "-I/usr/share/swig/1.3.40/python -I/usr/share/swig/1.3.40"
+ENV	GDAL_DATA	/tools/gdal/share/gdal
 
 # Install MiniConda Python distribution
-# This will build the base directory /tools for all following software
+# This will build the base directory/tools for all following software
 
 RUN		wget http://repo.continuum.io/miniconda/Miniconda-3.3.0-Linux-x86_64.sh && \
 		sh Miniconda-3.3.0-Linux-x86_64.sh -b -p /tools/anaconda && \
@@ -34,7 +36,6 @@ RUN		wget ftp://heasarc.gsfc.nasa.gov/software/fitsio/c/cfitsio3360.tar.gz && \
 RUN		wget http://download.osgeo.org/geos/geos-3.4.2.tar.bz2 && \
 		tar xvfj geos-3.4.2.tar.bz2 && \
 		cd geos-3.4.2 && \
-		export SWIG_FEATURES="-I/usr/share/swig/1.3.40/python -I/usr/share/swig/1.3.40" && \
 		./configure --prefix=/tools/geos --enable-python && \
 		make -j && make install && \
 		cd / && rm -rf geos*
@@ -57,9 +58,6 @@ RUN		rpm -ivh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8
 		make install && \
 		cd / && rm -rf openjpeg*
 
-
-ENV		SWIG_FEATURES "-I/usr/share/swig/1.3.40/python -I/usr/share/swig/1.3.40"
-
 # GDAL
 # Parallel make will fail due to race conditions. Do not use -j
 RUN		wget http://download.osgeo.org/gdal/1.11.0/gdal-1.11.0beta1.tar.gz && \
@@ -71,9 +69,7 @@ RUN		wget http://download.osgeo.org/gdal/1.11.0/gdal-1.11.0beta1.tar.gz && \
 		cd swig/python && python setup.py install && \
 		cd / && rm -rf gdal*
 
-ENV		GDAL_DATA	/tools/gdal/share/gdal
-
 # Install Ames Stereo Pipeline
-RUN     wget http://byss.ndc.nasa.gov/stereopipeline/binaries/StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5.tar.bz2 && \
+RUN		wget http://byss.ndc.nasa.gov/stereopipeline/binaries/StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5.tar.bz2 && \
 		tar xvfj StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5.tar.bz2 && \
 		rm StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5.tar.bz2
