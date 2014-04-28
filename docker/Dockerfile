@@ -13,19 +13,21 @@ RUN		yum install -y gcc make bison autoconf automake pkgconfig libtool elfutils 
 
 ENV     PATH    /tools/anaconda/bin:/tools/gdal/bin:$PATH:/tools/asp/bin
 ENV     LD_LIBRARY_PATH $LD_LIBRARY_PATH:/tools/gdal/lib:/tools/openjpeg-2/lib:/tools/proj/lib
-ENV	SWIG_FEATURES "-I/usr/share/swig/1.3.40/python -I/usr/share/swig/1.3.40"
+#ENV	SWIG_FEATURES "-I/usr/share/swig/1.3.40/python -I/usr/share/swig/1.3.40"
 ENV	GDAL_DATA	/tools/gdal/share/gdal
 
 # Install MiniConda Python distribution
 # This will build the base directory/tools for all following software
 
-RUN		wget https://github.com/PolarGeospatialCenter/asp/raw/master/originals/Miniconda/Miniconda-3.3.0-Linux-x86_64.sh && \
+RUN		wget --no-check-certificate \
+		https://github.com/PolarGeospatialCenter/asp/raw/master/originals/Miniconda/Miniconda-3.3.0-Linux-x86_64.sh && \
 		sh Miniconda-3.3.0-Linux-x86_64.sh -b -p /tools/anaconda && \
 		rm -f Miniconda*
 RUN		echo y | conda install scipy=0.13.3
 
 # Install CFITSIO
-RUN		wget https://github.com/PolarGeospatialCenter/asp/raw/master/originals/cfitsio/cfitsio3360.tar.gz && \
+RUN		wget --no-check-certificate \
+		https://github.com/PolarGeospatialCenter/asp/raw/master/originals/cfitsio/cfitsio3360.tar.gz && \
 		tar xvfz cfitsio3360.tar.gz && \
 		cd cfitsio && \
 		./configure --prefix=/tools/cfitsio --enable-sse2 --enable-ssse3 --enable-reentrant && \
@@ -33,7 +35,8 @@ RUN		wget https://github.com/PolarGeospatialCenter/asp/raw/master/originals/cfit
 		cd / && rm -rf cfitsio*
 
 # GEOS
-RUN		wget https://github.com/PolarGeospatialCenter/asp/raw/master/originals/geos/geos-3.4.2.tar.bz2 && \
+RUN		wget --no-check-certificate \
+		https://github.com/PolarGeospatialCenter/asp/raw/master/originals/geos/geos-3.4.2.tar.bz2 && \
 		tar xvfj geos-3.4.2.tar.bz2 && \
 		cd geos-3.4.2 && \
 		./configure --prefix=/tools/geos --enable-python && \
@@ -41,7 +44,8 @@ RUN		wget https://github.com/PolarGeospatialCenter/asp/raw/master/originals/geos
 		cd / && rm -rf geos*
 
 # PROJ
-RUN		wget https://github.com/PolarGeospatialCenter/asp/raw/master/originals/proj/proj-4.8.0.tar.gz && \
+RUN		wget --no-check-certificate \
+		https://github.com/PolarGeospatialCenter/asp/raw/master/originals/proj/proj-4.8.0.tar.gz && \
 		tar xvfz proj-4.8.0.tar.gz && \
 		cd proj-4.8.0 && \
 		./configure --prefix=/tools/proj --with-jni=no && \
@@ -51,7 +55,8 @@ RUN		wget https://github.com/PolarGeospatialCenter/asp/raw/master/originals/proj
 # OPENJPEG
 RUN		rpm -ivh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm && \
 		yum install -y cmake28 && \
-		wget https://github.com/PolarGeospatialCenter/asp/raw/master/originals/openjpeg/openjpeg-2.0.0.tar.gz && \
+		wget --no-check-certificate \
+		https://github.com/PolarGeospatialCenter/asp/raw/master/originals/openjpeg/openjpeg-2.0.0.tar.gz && \
 		tar xvfz openjpeg-2.0.0.tar.gz && \
 		cd openjpeg-2.0.0 && \
 		cmake28 -DCMAKE_INSTALL_PREFIX=/tools/openjpeg-2 && \
@@ -60,7 +65,8 @@ RUN		rpm -ivh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8
 
 # GDAL
 # Parallel make will fail due to race conditions. Do not use -j
-RUN		wget https://github.com/PolarGeospatialCenter/asp/raw/master/originals/gdal/gdal-1.11.0.tar.gz && \
+RUN		wget --no-check-certificate \
+		https://github.com/PolarGeospatialCenter/asp/raw/master/originals/gdal/gdal-1.11.0.tar.gz && \
 		tar xvfz gdal-1.11.0.tar.gz && \
 		cd gdal-1.11.0 && \
 		./configure --prefix=/tools/gdal --with-geos=/tools/geos/bin/geos-config --with-cfitsio=/tools/cfitsio \
@@ -73,4 +79,4 @@ RUN		wget https://github.com/PolarGeospatialCenter/asp/raw/master/originals/gdal
 RUN		wget http://byss.arc.nasa.gov/stereopipeline/daily_build/StereoPipeline-2.4.0-2014-04-27-x86_64-Linux-GLIBC-2.5.tar.bz2 && \
 		tar xvfj StereoPipeline-2.4.0-2014-04-27-x86_64-Linux-GLIBC-2.5.tar.bz2 -C /tools && \
 		rm StereoPipeline*.bz2 && \
-		rename Stereo* asp /tools/*
+		cd /tools; rename Stereo* asp *
