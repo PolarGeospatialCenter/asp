@@ -68,9 +68,9 @@ export	GDAL_DATA=$tools/gdal/share/gdal
 
 # Install Ames Stereo Pipeline
 cd $tools && \
-wget http://byss.ndc.nasa.gov/stereopipeline/binaries/StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5.tar.bz2 && \
-tar xvfj StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5.tar.bz2 -C $tools && \
-rm StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5.tar.bz2
+wget http://byss.arc.nasa.gov/stereopipeline/daily_build/StereoPipeline-2.4.0-2014-04-27-x86_64-Linux-GLIBC-2.5.tar.bz2 && \
+tar xvfj StereoPipeline-2.4.0-2014-04-27-x86_64-Linux-GLIBC-2.5.tar.bz2 -C $tools && \
+rm StereoPipeline-2.4.0-2014-04-27-x86_64-Linux-GLIBC-2.5.tar.bz2
 
 echo "export	PATH=$PATH:\$PATH" >> ~/init-asp.sh
 echo "export	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:\$LD_LIBRARY_PATH" >> ~/init-asp.sh
