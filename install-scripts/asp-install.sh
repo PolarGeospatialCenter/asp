@@ -78,8 +78,8 @@ tar xvfj StereoPipeline-2.4.0-2014-04-27-x86_64-Linux-GLIBC-2.5.tar.bz2 -C $tool
 rm StereoPipeline*.bz2 && \
 rename Stereo* asp *
 
-echo "export	PATH=$PATH:\$PATH" >> ~/init-asp.sh
-echo "export	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:\$LD_LIBRARY_PATH" >> ~/init-asp.sh
+echo "export	PATH=$PATH:\$PATH" >> $tools/init-asp.sh
+echo "export	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:\$LD_LIBRARY_PATH" >> $tools/init-asp.sh
 echo
 echo	"The tools were installed in $tools."
-echo	"There is an init script that sets the environment and is installed at ~/init-asp.sh. You can source this file to run."
+echo	"There is an init script that sets the environment and is installed at $tools/init-asp.sh. You can source this file to run."
