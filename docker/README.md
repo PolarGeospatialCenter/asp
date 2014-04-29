@@ -1,6 +1,6 @@
 Software versions installed
 
-Ubuntu 14.04 LTS (updated as of build date)  
+CentOS 6.5 (updated as of build date)  
 
 Miniconda 3.3.0  
 — conda 3.4.2  
