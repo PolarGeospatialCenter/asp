@@ -5,7 +5,7 @@ echo "Please specify a path to install to:"
 read tools
 
 mkdir -p $tools
-export	PATH=$tools/anaconda/bin:$tools/gdal/bin:$PATH:$tools/StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5/bin
+export	PATH=$tools/anaconda/bin:$tools/gdal/bin:$PATH:$tools/asp/bin
 export	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$tools/gdal/lib:$tools/openjpeg-2/lib:$tools/proj/lib
 
 # Install MiniConda Python distribution
@@ -15,7 +15,7 @@ cd $tools && \
 wget https://github.com/PolarGeospatialCenter/asp/raw/master/originals/Miniconda/Miniconda-3.3.0-Linux-x86_64.sh && \
 sh Miniconda-3.3.0-Linux-x86_64.sh -b -p $tools/anaconda && \
 rm -f Miniconda*
-echo y | conda install numpy scipy
+echo y | conda install scipy=0.13.3
 
 # Install CFITSIO
 cd $tools && \
@@ -51,7 +51,6 @@ cd openjpeg-2.0.0 && \
 cmake -DCMAKE_INSTALL_PREFIX=$tools/openjpeg-2 && \
 make install
 
-
 # GDAL
 # Parallel make will fail due to race conditions. Do not use -j
 export	SWIG_FEATURES="-I/usr/share/swig/1.3.40/python -I/usr/share/swig/1.3.40"
@@ -70,7 +69,8 @@ export	GDAL_DATA=$tools/gdal/share/gdal
 cd $tools && \
 wget http://byss.arc.nasa.gov/stereopipeline/daily_build/StereoPipeline-2.4.0-2014-04-27-x86_64-Linux-GLIBC-2.5.tar.bz2 && \
 tar xvfj StereoPipeline-2.4.0-2014-04-27-x86_64-Linux-GLIBC-2.5.tar.bz2 -C $tools && \
-rm StereoPipeline-2.4.0-2014-04-27-x86_64-Linux-GLIBC-2.5.tar.bz2
+rm StereoPipeline*.bz2 && \
+rename Stereo* asp $tools/*
 
 echo "export	PATH=$PATH:\$PATH" >> ~/init-asp.sh
 echo "export	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:\$LD_LIBRARY_PATH" >> ~/init-asp.sh

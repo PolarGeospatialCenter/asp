@@ -1,11 +1,6 @@
-Installers used to build the ASP toolset on HPC systems. This builds best with the following development tools:
-
-- cmake 2.8+  
-- GCC 4.8.2+
-
----
-
 Software versions installed
+
+Ubuntu 14.04 LTS (updated as of build date)  
 
 Miniconda 3.3.0  
 — conda 3.4.2  

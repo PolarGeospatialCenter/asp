@@ -22,7 +22,7 @@ ENV	GDAL_DATA	/tools/gdal/share/gdal
 RUN		wget https://github.com/PolarGeospatialCenter/asp/raw/master/originals/Miniconda/Miniconda-3.3.0-Linux-x86_64.sh && \
 		sh Miniconda-3.3.0-Linux-x86_64.sh -b -p /tools/anaconda && \
 		rm -f Miniconda*
-RUN		echo y | conda install numpy scipy
+RUN		echo y | conda install scipy=0.13.3
 
 # Install CFITSIO
 RUN		wget https://github.com/PolarGeospatialCenter/asp/raw/master/originals/cfitsio/cfitsio3360.tar.gz && \
@@ -70,9 +70,7 @@ RUN		wget https://github.com/PolarGeospatialCenter/asp/raw/master/originals/gdal
 		cd / && rm -rf gdal*
 
 # Install Ames Stereo Pipeline
-#RUN		wget http://byss.ndc.nasa.gov/stereopipeline/binaries/StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5.tar.bz2 && \
-#		tar xvfj StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5.tar.bz2 && \
-#		rm StereoPipeline-2.3.0-x86_64-Linux-GLIBC-2.5.tar.bz2
 RUN		wget http://byss.arc.nasa.gov/stereopipeline/daily_build/StereoPipeline-2.4.0-2014-04-27-x86_64-Linux-GLIBC-2.5.tar.bz2 && \
-		tar xvfj StereoPipeline-2.4.0-2014-04-27-x86_64-Linux-GLIBC-2.5.tar.bz2 -C /tools/asp && \
-		rm StereoPipeline-2.4.0-2014-04-27-x86_64-Linux-GLIBC-2.5.tar.bz2
+		tar xvfj StereoPipeline-2.4.0-2014-04-27-x86_64-Linux-GLIBC-2.5.tar.bz2 -C /tools && \
+		rm StereoPipeline*.bz2 && \
+		rename Stereo* asp /tools/*
