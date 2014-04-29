@@ -1,11 +1,11 @@
 # DOCKER-VERSION 0.3.4
-FROM    centos
+FROM    centos:539c0211cd76
 
 MAINTAINER Charles Nguyen <ctn@umn.edu>
 
 # Install updates and tools
 RUN		yum install -y gcc make bison autoconf automake pkgconfig libtool elfutils gcc-c++ flex swig gcc-gfortran \
-		libSM libXext wget tar bzip2
+		libSM libXext
 
 # Set paths for all software        
 # We are setting these early on to reduce the number of layers created. Update these as you update software.
