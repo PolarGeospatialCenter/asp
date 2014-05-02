@@ -66,9 +66,9 @@ RUN		rpm -ivh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8
 # GDAL
 # Parallel make will fail due to race conditions. Do not use -j
 RUN		wget --no-check-certificate \
-		https://github.com/PolarGeospatialCenter/asp/raw/master/originals/gdal/gdal-1.11.0.tar.gz && \
-		tar xvfz gdal-1.11.0.tar.gz && \
-		cd gdal-1.11.0 && \
+		http://download.osgeo.org/gdal/1.10.0/gdal-1.10.0.tar.gz && \
+		tar xvfz gdal-1.10.0.tar.gz && \
+		cd gdal-1.10.0 && \
 		./configure --prefix=/tools/gdal --with-geos=/tools/geos/bin/geos-config --with-cfitsio=/tools/cfitsio \
 		--with-python --with-openjpeg=/tools/openjpeg-2 --with-sqlite3=no && \
 		make && make install && \
