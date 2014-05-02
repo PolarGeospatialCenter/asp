@@ -1,6 +1,6 @@
 Software versions installed
 
-CentOS 6.4 (updated as of build date)  
+CentOS 6.4 image: 539c0211cd76  (updated as of build date)  
 
 * Miniconda 3.3.0  
  * conda 3.4.2  
@@ -14,5 +14,5 @@ CentOS 6.4 (updated as of build date)
 * GEOS 3.4.2  
 * PROJ 4.8.0  
 * OpenJPEG 2.0.0  
-* GDALl 1.11.0  
+* GDALl 1.10.0  
 * StereoPipeline-2.4.0-2014-04-27-x86_64-Linux-GLIBC-2.5

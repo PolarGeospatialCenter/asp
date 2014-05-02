@@ -19,5 +19,5 @@ Software versions installed
 * GEOS 3.4.2  
 * PROJ 4.8.0  
 * OpenJPEG 2.0.0  
-* GDALl 1.11.0  
+* GDALl 1.10.0  
 * StereoPipeline-2.4.0-2014-04-27-x86_64-Linux-GLIBC-2.5
