@@ -61,8 +61,7 @@ RUN		rpm -ivh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8
 		cd openjpeg-2.0.0 && \
 		cmake28 -DCMAKE_INSTALL_PREFIX=/tools/openjpeg-2 && \
 		make install && \
-		cd / && rm -rf openjpeg* && \
-		yum remove cmake28
+		cd / && rm -rf openjpeg*
 
 # GDAL
 # Parallel make will fail due to race conditions. Do not use -j
