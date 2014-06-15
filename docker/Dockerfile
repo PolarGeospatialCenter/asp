@@ -76,7 +76,7 @@ RUN		wget --no-check-certificate \
 		cd / && rm -rf gdal*
 
 # Install Ames Stereo Pipeline
-RUN		wget http://byss.arc.nasa.gov/stereopipeline/daily_build/StereoPipeline-2.4.0-2014-04-27-x86_64-Linux-GLIBC-2.5.tar.bz2 && \
-		tar xvfj StereoPipeline-2.4.0-2014-04-27-x86_64-Linux-GLIBC-2.5.tar.bz2 -C /tools && \
+RUN		wget http://byss.ndc.nasa.gov/stereopipeline/binaries/StereoPipeline-2.4.0-x86_64-Linux-GLIBC-2.5.tar.bz2 && \
+		tar xvfj StereoPipeline-2.4.0-x86_64-Linux-GLIBC-2.5.tar.bz2 -C /tools && \
 		rm StereoPipeline*.bz2 && \
 		cd /tools; rename Stereo* asp *
