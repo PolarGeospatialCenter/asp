@@ -14,7 +14,7 @@ RUN		yum install -y gcc make bison autoconf automake pkgconfig libtool elfutils 
 ENV     PATH    /tools/anaconda/bin:/tools/gdal/bin:$PATH:/tools/asp/bin
 ENV     LD_LIBRARY_PATH $LD_LIBRARY_PATH:/tools/gdal/lib:/tools/openjpeg-2/lib:/tools/proj/lib
 #ENV	SWIG_FEATURES "-I/usr/share/swig/1.3.40/python -I/usr/share/swig/1.3.40"
-ENV	GDAL_DATA	/tools/gdal/share/gdal
+ENV		GDAL_DATA	/tools/gdal/share/gdal
 
 # Install MiniConda Python distribution
 # This will build the base directory/tools for all following software
@@ -61,7 +61,8 @@ RUN		rpm -ivh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8
 		cd openjpeg-2.0.0 && \
 		cmake28 -DCMAKE_INSTALL_PREFIX=/tools/openjpeg-2 && \
 		make install && \
-		cd / && rm -rf openjpeg*
+		cd / && rm -rf openjpeg* && \
+		yum remove cmake28
 
 # GDAL
 # Parallel make will fail due to race conditions. Do not use -j
