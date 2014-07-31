@@ -14,7 +14,7 @@ export	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$tools/gdal/lib:$tools/openjpeg-2/lib:$t
 cd $tools && \
 wget --no-check-certificate \
 https://github.com/PolarGeospatialCenter/asp/raw/master/originals/Miniconda/Miniconda-3.3.0-Linux-x86_64.sh && \
-sh Miniconda-3.3.0-Linux-x86_64.sh -b -p $tools/anaconda && \
+bash Miniconda-3.3.0-Linux-x86_64.sh -b -p $tools/anaconda && \
 rm -f Miniconda*
 echo y | conda install scipy=0.13.3
 
@@ -79,8 +79,9 @@ tar xvfj StereoPipeline-2.4.0-x86_64-Linux-GLIBC-2.5.tar.bz2 -C $tools && \
 rm StereoPipeline*.bz2 && \
 rename Stereo* asp *
 
-echo "export	PATH=$PATH:\$PATH" >> $tools/init-asp.sh
-echo "export	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:\$LD_LIBRARY_PATH" >> $tools/init-asp.sh
+echo "export	PATH=$tools/anaconda/bin:$tools/gdal/bin:\$PATH:$tools/asp/bin" >> $tools/init-asp.sh
+echo "export	GDAL_DATA=$tools/gdal/share/gdal" >> $tools/init-asp.sh
+echo "export	LD_LIBRARY_PATH=$tools/gdal/lib:$tools/openjpeg-2/lib:$tools/proj/lib:\$LD_LIBRARY_PATH" >> $tools/init-asp.sh
 echo
 echo	"The tools were installed in $tools."
 echo	"There is an init script that sets the environment and is installed at $tools/init-asp.sh. You can source this file to run."
