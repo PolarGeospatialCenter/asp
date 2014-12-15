@@ -1,23 +1,23 @@
 Installers used to build the ASP toolset on HPC systems. This builds best with the following development tools:
 
-* cmake 2.8+  
 * GCC 4.8.2+
 
 ---
 
 Software versions installed
 
-* Miniconda 3.3.0  
- * conda 3.4.2  
+* Miniconda 3.7.0  
+ * conda  
  * numpy 1.8.1  
- * OpenSSL 1.0.1g  
- * python 2.7.6.1  
- * pyyaml 3.11  
+ * OpenSSL   
+ * python  
+ * pyyaml   
  * scipy 0.13.3  
- * sqlite 3.7.13  
+ * sqlite   
 * cfitsio 3.360  
 * GEOS 3.4.2  
 * PROJ 4.8.0  
+* CMake 2.8.12.2
 * OpenJPEG 2.0.0  
 * GDALl 1.10.0  
-* StereoPipeline-2.4.0-2014-04-27-x86_64-Linux-GLIBC-2.5
+* StereoPipeline-2.4.2-2014-10-06-x86_64-Linux-GLIBC-2.5
