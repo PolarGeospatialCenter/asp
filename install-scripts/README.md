@@ -20,4 +20,4 @@ Software versions installed
 * CMake 2.8.12.2
 * OpenJPEG 2.0.0  
 * GDAL 1.10.0  
-* StereoPipeline-2.5.0-2015-08-30-x86_64 
+* StereoPipeline-2.5.1-2015-11-13-x86_64
