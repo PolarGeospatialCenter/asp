@@ -104,8 +104,8 @@ export	GDAL_DATA=$tools/gdal/share/gdal
 
 # Install Ames Stereo Pipeline
 cd $tools && \
-wget -nv http://byss.ndc.nasa.gov/stereopipeline/binaries/StereoPipeline-2.5.0-2015-08-30-x86_64-Linux.tar.bz2 && \
-tar xfj StereoPipeline-2.5.0-2015-08-30-x86_64-Linux.tar.bz2 -C $tools && \
+wget -nv http://byss.ndc.nasa.gov/stereopipeline/binaries/StereoPipeline-2.5.1-2015-11-13-x86_64-Linux.tar.bz2 && \
+tar xfj StereoPipeline-2.5.1-2015-11-13-x86_64-Linux.tar.bz2 -C $tools && \
 rm StereoPipeline*.bz2 && \
 rename Stereo* asp *
 
