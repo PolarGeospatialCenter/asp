@@ -38,7 +38,7 @@ wget -nv --no-check-certificate \
 http://repo.continuum.io/miniconda/Miniconda-3.7.0-Linux-x86_64.sh && \
 bash Miniconda-3.7.0-Linux-x86_64.sh -b -p $tools/anaconda && \
 rm -f Miniconda*
-echo y | conda install scipy=0.13.3 numpy=1.8.1 # python=2.7.6 pyyaml=3.11 sqlite=3.7.13 # Can bind specific if needed
+echo y | conda install scipy numpy # python=2.7.6 pyyaml=3.11 sqlite=3.7.13 # Can bind specific if needed
 
 # Install CFITSIO
 cd $tools && \
