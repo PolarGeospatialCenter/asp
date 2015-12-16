@@ -68,11 +68,11 @@ cd proj-4.8.0 && \
 ./configure --prefix=$tools/proj --with-jni=no && \
 make -j && make install
 
-# Cmake 2.8
+# Cmake 3.4
 cd $tools &&
-wget -nv http://www.cmake.org/files/v2.8/cmake-2.8.12.2.tar.gz && \
-tar xfz cmake-2.8.12.2.tar.gz && \
-cd cmake-2.8.12.2 && \
+wget -nv --no-check-certificate https://cmake.org/files/v3.4/cmake-3.4.1.tar.gz && \
+tar xfz cmake-3.4.1.tar.gz && \
+cd cmake-3.4.1 && \
 ./configure && \
 gmake
 
@@ -83,7 +83,7 @@ wget -nv --no-check-certificate \
 https://github.com/PolarGeospatialCenter/asp/raw/master/originals/openjpeg/openjpeg-2.0.0.tar.gz && \
 tar xfz openjpeg-2.0.0.tar.gz && \
 cd openjpeg-2.0.0 && \
-$tools/cmake-2.8.12.2/bin/cmake -DCMAKE_INSTALL_PREFIX=$tools/openjpeg-2 && \
+$tools/cmake-3.4.1/bin/cmake -DCMAKE_INSTALL_PREFIX=$tools/openjpeg-2 && \
 make install
 
 # GDAL
