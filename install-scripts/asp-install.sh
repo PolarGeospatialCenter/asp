@@ -88,13 +88,12 @@ make install
 
 # GDAL
 # Parallel make will fail due to race conditions. Do not use -j
-# GDAL 1.11 breaks sparse_disp
 export	SWIG_FEATURES="-I/usr/share/swig/1.3.40/python -I/usr/share/swig/1.3.40"
 cd $tools && \
 wget -nv --no-check-certificate \
-http://download.osgeo.org/gdal/1.10.0/gdal-1.10.0.tar.gz && \
-tar xfz gdal-1.10.0.tar.gz && \
-cd gdal-1.10.0 && \
+http://download.osgeo.org/gdal/2.1.0/gdal-2.1.0.tar.gz && \
+tar xfz gdal-2.1.0.tar.gz && \
+cd gdal-2.1.0 && \
 ./configure --prefix=$tools/gdal --with-geos=$tools/geos/bin/geos-config --with-cfitsio=$tools/cfitsio \
 --with-python --with-openjpeg=$tools/openjpeg-2 --with-sqlite3=no && \
 make && make install && \
@@ -104,8 +103,8 @@ export	GDAL_DATA=$tools/gdal/share/gdal
 
 # Install Ames Stereo Pipeline
 cd $tools && \
-wget -nv http://byss.ndc.nasa.gov/stereopipeline/binaries/StereoPipeline-2.5.1-2015-11-13-x86_64-Linux.tar.bz2 && \
-tar xfj StereoPipeline-2.5.1-2015-11-13-x86_64-Linux.tar.bz2 -C $tools && \
+wget -nv http://byss.ndc.nasa.gov/stereopipeline/binaries/StereoPipeline-2.5.2-2016-02-29-x86_64-Linux.tar.bz2 && \
+tar xfj StereoPipeline-2.5.2-2016-02-29-x86_64-Linux.tar.bz2 -C $tools && \
 rm StereoPipeline*.bz2 && \
 rename Stereo* asp *
 
