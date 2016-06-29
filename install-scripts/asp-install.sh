@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# BlueWaters specific changes to use GNU compilers
+#
+# module unload PrgEnv-cray
+# module load PrgEnv-gnu
+# export CC=`which gcc`
+
 echo 
 echo "Please specify a path to install to:"
 read tools
