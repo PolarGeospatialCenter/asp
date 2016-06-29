@@ -5,6 +5,7 @@
 # module unload PrgEnv-cray
 # module load PrgEnv-gnu
 # export CC=`which gcc`
+# export CXX=`which g++`
 
 echo 
 echo "Please specify a path to install to:"
