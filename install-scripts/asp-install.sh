@@ -69,9 +69,9 @@ make -j && make install
 # PROJ
 cd $tools && \
 wget -nv --no-check-certificate \
-https://github.com/PolarGeospatialCenter/asp/raw/master/originals/proj/proj-4.8.0.tar.gz && \
-tar xfz proj-4.8.0.tar.gz && \
-cd proj-4.8.0 && \
+https://github.com/PolarGeospatialCenter/asp/raw/master/originals/proj/proj-4.9.3.tar.gz && \
+tar xfz proj-4.9.3.tar.gz && \
+cd proj-4.9.3 && \
 ./configure --prefix=$tools/proj --with-jni=no && \
 make -j && make install
 
@@ -98,9 +98,9 @@ make install
 export	SWIG_FEATURES="-I/usr/share/swig/1.3.40/python -I/usr/share/swig/1.3.40"
 cd $tools && \
 wget -nv --no-check-certificate \
-http://download.osgeo.org/gdal/2.1.0/gdal-2.1.0.tar.gz && \
-tar xfz gdal-2.1.0.tar.gz && \
-cd gdal-2.1.0 && \
+http://download.osgeo.org/gdal/2.2.0/gdal-2.2.0.tar.gz && \
+tar xfz gdal-2.2.0.tar.gz && \
+cd gdal-2.2.0 && \
 ./configure --prefix=$tools/gdal --with-geos=$tools/geos/bin/geos-config --with-cfitsio=$tools/cfitsio \
 --with-python --with-openjpeg=$tools/openjpeg-2 --with-sqlite3=no && \
 make && make install && \
@@ -110,8 +110,8 @@ export	GDAL_DATA=$tools/gdal/share/gdal
 
 # Install Ames Stereo Pipeline
 cd $tools && \
-wget -nv http://byss.ndc.nasa.gov/stereopipeline/binaries/StereoPipeline-2.5.2-2016-02-29-x86_64-Linux.tar.bz2 && \
-tar xfj StereoPipeline-2.5.2-2016-02-29-x86_64-Linux.tar.bz2 -C $tools && \
+wget -nv https://github.com/NeoGeographyToolkit/StereoPipeline/releases/download/v2.6.0/StereoPipeline-2.6.0-2017-06-01-x86_64-Linux.tar.bz2 && \
+tar xfj StereoPipeline-2.6.0-2017-06-01-x86_64-Linux.tar.bz2 -C $tools && \
 rm StereoPipeline*.bz2 && \
 rename Stereo* asp *
 
